@@ -55,7 +55,24 @@ export function InputDemo() {
       setLoading(false);
     }
   };
+  const handleDownload = async (url, filename) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
 
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(a);
+    } catch (error) {
+      setError("Failed to download the file. Please try again.");
+    }
+  };
   return (
     <div className="h-[100vh] flex flex-col justify-center items-center px-4 bg-black">
       <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl text-white">
@@ -94,8 +111,14 @@ export function InputDemo() {
               {videoData.medias.map((media, index) => (
                 <a
                   key={index}
-                  href={media.url}
-                  download
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleDownload(
+                      media.url,
+                      `${videoData.title}.${media.extension}`
+                    );
+                  }}
                   className="p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-between group"
                 >
                   <div>
