@@ -1,0 +1,21 @@
+{
+  "name": "SaveMe",
+  "short_name": "SaveMe",
+  "description": "Download any Kind of video",
+  "theme_color": "#0000",
+  "background_color": "#0000",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
