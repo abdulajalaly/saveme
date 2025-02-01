@@ -74,7 +74,7 @@ export function InputDemo() {
     }
   };
   return (
-    <div className="h-[100vh] flex flex-col justify-center items-center px-4 bg-black">
+    <div className="h-[100vh] flex flex-col justify-center items-center px-4">
       <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl text-white">
         Download Anything
       </h2>
@@ -111,25 +111,22 @@ export function InputDemo() {
               {videoData.medias.map((media, index) => (
                 <a
                   key={index}
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleDownload(
-                      media.url,
-                      `${videoData.title}.${media.extension}`
-                    );
-                  }}
-                  className="p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-between group"
+                  href={media.url}
+                  download
+                  className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 group"
                 >
-                  <div>
-                    <span className="text-white font-medium">
-                      {media.quality.replace(/_/g, " ").toUpperCase()}
-                    </span>
-                    <span className="block text-gray-400 text-sm mt-1">
-                      {media.type} ({media.extension})
-                    </span>
-                  </div>
-                  <Download className="h-5 w-5 text-white group-hover:text-blue-400 transition-colors" />
+                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-between rounded-full bg-[rgb(24,24,27)] px-4 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                    <div className="flex flex-col">
+                      <span className="font-medium">
+                        {media.quality.replace(/_/g, " ").toUpperCase()}
+                      </span>
+                      <span className="block text-gray-400 text-xs mt-1">
+                        {media.type} ({media.extension})
+                      </span>
+                    </div>
+                    <Download className="h-5 w-5 text-white group-hover:text-blue-400 transition-colors" />
+                  </span>
                 </a>
               ))}
             </div>
